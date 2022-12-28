@@ -16,3 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/check',function(){
+    $con = new mysqli('localhost','root','rakesh123','laravel');
+    if ($con){
+        echo "connection established successfully";
+    }
+});
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
