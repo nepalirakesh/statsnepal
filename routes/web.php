@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/check',function(){
-    $con = new mysqli('localhost','root','rakesh123','laravel');
-    if ($con){
-        echo "connection established successfully";
-    }
-});
+
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home',[App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/posts',[PostController::class,'index'])->name('posts');
+Route::get('/posts/create',[PostController::class,'create'])->name('create');
+Route::post('/posts/store',[PostController::class,'store'])->name('store');
+Route::delete('/posts/delete/{post}',[PostController::class,'delete'])->name('delete');
