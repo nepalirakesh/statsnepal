@@ -19,43 +19,29 @@
         </div>
       </nav>
 
-      <h3 class="text-center mt-5">Create post</h3>
-      <form class="container w-50" action="{{route('store')}}" method="POST">
-        @csrf
+      <form action="{{route('update',$post)}}" class="container w-50" method="POST">
+        <h3 class="text-center mt-5">Edit Post</h3>
         <div class="form-group" >
 
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" placeholder="title" name="title">
+            <input type="text" class="form-control" id="title"  value ="{{$post->title}}" name="title">
           </div>
-          <span style="color: red">@error('title'){{$message}} @enderror</span>
-
-
-
-
-
+          <span style="color:red">@error('title'){{$message}}@enderror</span>
         <div class="form-group">
-            <label for="exampleFormControlTextarea1">Content</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="enter you post" rows="3" name="content"></textarea>
+            <label for="textarea">Content</label>
+            <textarea class="form-control" id="textarea"  rows="3" name="content">{{$post->content}}</textarea>
           </div>
-          <span style="color: red">@error('content'){{$message}} @enderror</span>
-
-{{--
-          @if ($errors->any())
-          <div class="alert alert-danger">
-              <ul>
-                  @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
-          </div>
-      @endif --}}
+          <span style="color:red">@error('content'){{$message}}@enderror</span>
+          @csrf
+          @method('PUT')
           <div class="container">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary btn-sm">Edit</i></button>
 
           </div>
+
       </form>
 
-
+      <script src="https://kit.fontawesome.com/a90819630b.js" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

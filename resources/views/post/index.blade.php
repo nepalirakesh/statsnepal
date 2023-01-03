@@ -15,23 +15,51 @@
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" class="btn btn-dark"  color="white" href="{{route('create')}}">Create Post</a>
 
-            </div>
+
+
+
           </div>
         </div>
       </nav>
+@if(Session::has('success'))
+      <div class="container mt-2 w-50">
+        <div class="alert alert-primary" role="alert">
+            {{Session::get('success')}}
+
+          </div>
+      </div>
+@endif
+@if(Session::has('delete'))
+<div class="container mt-2 w-50">
+    <div class="alert alert-danger" role="alert">
+        {{Session::get('delete')}}
+
+      </div>
+  </div>
+  @endif
+  @if(Session::has('update'))
+<div class="container mt-2 w-50">
+    <div class="alert alert-success" role="alert">
+        {{Session::get('update')}}
+
+      </div>
+  </div>
+  @endif
+
+
+
     <div class="container">
-        <h1 class="text-center mt-5">Posts</h1>
-      <table class="table container table-bordered">
+      <table class="table container table-bordered w-75 text-center" style="table-layout: fixed" >
+        <h3 class="text-center mt-5">Posts</h3>
+
         <thead class="thead-dark">
           <tr class="text-center">
-            <th scope="col">ID</th>
-            <th scope="col">Title</th>
-            <th scope="col">Content</th>
-            <th scope="col" colspan="2"> Manage</th>
+            <th scope="col" width="5%">ID</th>
+            <th scope="col"  width="10%">Title</th>
+            <th scope="col"width="60%">Content</th>
+            <th scope="col" width="15%" colspan="3"> Manage</th>
+
 
           </tr>
         </thead>
@@ -39,14 +67,26 @@
             @foreach($posts as $post)
             <tr class="text-center">
                 <td>{{$post->id}}</td>
-                <td>{{$post->title}}</td>
-                <td>{{$post->content}}</td>
-               <td><a href=""><button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button></a></td>
-               <td>
-                    <form action="{{route('delete',$post->id)}}" method="Post">
+                <td>{{Str::limit($post->title,10)}}</td>
+                <td>{{Str::limit($post->content,25)}}</td>
+
+                 <td>
+                <form action="{{route('show',$post)}}" method ="GET">
+                    @csrf
+                    <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-eye"></i></button>
+                    </form>
+            </td>
+                <td>
+                    <form action="{{route('edit',$post)}}" method ="GET">
                         @csrf
-                        @methoD('DELETE')
-                    <button type="submit" class="btn btn-danger"><i class="fa-sharp fa-solid fa-trash"></i></button>
+                        <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
+                        </form>
+                </td>
+               <td>
+                    <form action="{{route('delete',$post)}}" method="Post">
+                        @csrf
+                        @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa-sharp fa-solid fa-trash"></i></button>
                     </form>
                 </td>
 
@@ -58,7 +98,10 @@
 
         </tbody>
       </table>
-      </div>
+      <div class="container text-center w-75">
+      <button class="btn btn-primary btn-sm"><a class="nav-link active" aria-current="page"  color="white" href="{{route('create')}}">Create Post</a></button>
+    </div>
+
 
 
 
