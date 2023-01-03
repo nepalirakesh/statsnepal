@@ -37,7 +37,7 @@ class PostFormRequest extends FormRequest
     return [
         'title.required' => 'A title is required',
         'title.alpha'=>'Only alphabaets allowed',
-        'content.required' => 'A message is required',
+        'content.required' => 'A content cant be empty ',
         'content.max'=>'only 200 characters allowe',
     ];
 }
