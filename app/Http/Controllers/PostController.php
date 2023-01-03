@@ -5,15 +5,22 @@ namespace App\Http\Controllers;
 // use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Http\Requests\PostFormRequest;
+use Illuminate\Support\Facades\Auth;
+
 // use App\Http\Requests;
 
 class PostController extends Controller
 {
     public function index(){
 
-     $posts=Post::all();
+        if(Auth::check()){
 
-    return view('post.index',compact("posts"));
+            $posts=Post::all();
+            return view('post.index',compact("posts"));
+        }
+
+        return redirect()->route('show_login');
+
 
     }
 

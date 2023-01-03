@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('postlayout.master')
 
 @section('content')
 <div class="container">
