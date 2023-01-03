@@ -1,5 +1,5 @@
 @extends('postlayout.master')
-@section('title','All Posts')
+@section('title','All Post')
 
 @section('content')
 
@@ -50,7 +50,7 @@
         </tbody>
       </table>
       <div class="container text-center w-75">
-      <button class="btn btn-primary btn-sm"><a class="nav-link active" aria-current="page"  color="white" href="{{route('create')}}">Create Post</a></button>
+      <a  aria-current="page" class="btn btn-primary btn-sm" href="{{route('create')}}">Create Post</a>
     </div>
 
 
